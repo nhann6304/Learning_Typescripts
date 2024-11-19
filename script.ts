@@ -93,3 +93,118 @@ const abc: abc = {
 }
 
 console.log("tinh toan", abc.calculator({ height: 123, mass: 123 }));
+
+console.log("-----------------------------------------------------------------");
+
+
+
+console.log("-----------------------------------------------------------------");
+//for
+for (let i = 0; i <= bill.length - 1; i++) {
+    console.log(bill[i]);
+}
+//while
+let sountWhile = 0;
+while (sountWhile < bill.length) {
+    console.log("Kết quả vòng while::::", bill[sountWhile]);
+    sountWhile++
+}
+
+
+console.log("-----------------------------------------------------------------");
+
+
+const obj = {
+    bills: [123, 123, 123, 123, 123],
+    calcTips: function () {
+        this.tips = [];
+        this.finalValues = [];
+
+        for (let i = 0; i < this.bills.length; i++) {
+            let bill = this.bills[i];
+            console.log(i);
+            this.tips[i] = bill
+        }
+
+        return tips
+    }
+}
+
+console.log("Dòng 131", obj.calcTips());
+
+console.log("-----------------------------------------------------------------");
+console.log("test1", test("test1"));
+
+function test(value1: string): boolean {
+    return true
+}
+
+
+const test2 = function (value2: string): boolean {
+    return false
+}
+console.log("test2", test("test2"));
+
+
+// scoping => Độ đóng hộp
+console.log("-----------------------------------------------------------------");
+
+const scopingGlobal = "scopingGlobal";
+
+function funcScopingGlobal() {
+    const b = "Hi"
+
+    function funcScopingGlobalChild() {
+        const c = "Hi111"
+        return c
+    }
+    return `${funcScopingGlobalChild()} ${b}`
+}
+
+
+
+function third() {
+    const d = "Nhan";
+    console.log("ra gì", scopingGlobal + d);
+}
+
+third()
+
+console.log(
+    funcScopingGlobal()
+);
+console.log("-----------------------------------------------------------------");
+
+// Con trỏ THIS
+console.log("-----------------------------------------------------------------");
+// Do khong có đối tượng class nên k có giợi ý 
+const nhan = {
+    name: "Nhân",
+    age: 20,
+    yearOnBirth: 2004,
+    calculateAge: function () {
+        console.log(this);
+        console.log(this.name);
+    }
+}
+
+console.log(nhan.calculateAge());
+
+// Viết theo hướng đối tượng
+
+class Nhan1 {
+    private name: string = "Nhân";
+    age: number = 20;
+    yearOnBirth: number = 2004;
+    calculateAge(year: number) {
+        return year = this.yearOnBirth;
+    }
+}
+
+const oopNhan1 = new Nhan1();
+console.log(oopNhan1);
+
+
+
+
+console.log("-----------------------------------------------------------------");
