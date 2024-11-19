@@ -50,3 +50,22 @@ const tips = [
 
 console.log("-----------------------------------------------------------------");
 
+const john = {
+    firstName: "John",
+    lastName: "Smith",
+    birthYear: 2024,
+    family: ['Quin', "Tri", "Bob", "Emily"],
+    job: "teacher",
+    isMarried: false,
+    tinhtoan: function (birthDay: number) {
+        // return 2024 - this.birthYear;
+        return 2024 - birthDay;
+
+    }
+}
+
+
+console.log(john.tinhtoan(2004));
+
+// console.log("Lấy value từ key", john.birthYear); // Lấy value từ key
+// console.log("Tính toán hàm", john.tinhtoan(2004));
