@@ -128,9 +128,13 @@ var nhan = {
     calculateAge: function () {
         console.log(this);
         console.log(this.name);
+        function innerFunction() {
+            console.log("bên trong");
+        }
+        innerFunction();
     }
 };
-console.log(nhan.calculateAge());
+console.log("THIS không hướng đối tượng", nhan.calculateAge());
 // Viết theo hướng đối tượng
 var Nhan1 = /** @class */ (function () {
     function Nhan1() {
@@ -144,5 +148,103 @@ var Nhan1 = /** @class */ (function () {
     return Nhan1;
 }());
 var oopNhan1 = new Nhan1();
-console.log(oopNhan1);
+console.log("THIS hướng đối tượng", oopNhan1.calculateAge(2024));
+// Tạo constructor bằng tay
+var Personnel = function (name, yearOnBirth, job) {
+    this.name = name;
+    this.yearOnBirth = yearOnBirth;
+    this.job = job;
+    this.calculateAge = function () {
+        return 2024 - this.yearOnBirth;
+    };
+};
+Personnel.prototype.lastName = "bắt buộc là 1231232121 ";
+var john1 = new Personnel("Nhân", 2004, "developer");
+console.log("test::::::::::::::::::::::", john1.calculateAge());
+console.log("test::::::::::::::::::::::", john1.lastName);
+var Person = /** @class */ (function () {
+    function Person() {
+    }
+    return Person;
+}());
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// Đệ quy
+function dequy(n) {
+    if (n < 10) {
+        return 1;
+    }
+    console.log("chạy", n);
+    dequy(n - 1);
+    return true;
+}
+console.log(dequy(20));
+// DOM
+console.log("-----------------------------------------------------------------");
+var scores = [0, 0]; // số điêm 2 bên
+var roundScores = 0; // số điểm của lượt chơi đó 
+var activePlayer = 0; // người chơi bên nào
+var dice = ((Math.floor(Math.random() * 6) + 1));
+console.log(dice);
+// document.querySelector("#score--0").textContent = dice.toString();
+// (document.querySelector(".dice") as HTMLElement).style.display = "none";
+// document.querySelector(".btn--roll").addEventListener("click")
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// Tính toán tuổi trong mãng giải thuật siu cơ bản 
+var yearAge = [1967, 2020, 2000, 2001];
+function ArrayCalc(arr, fn) {
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+function calculateAge1(el) {
+    return 2024 - el;
+}
+function checkAges(el) {
+    if (el >= 18) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+var age = ArrayCalc(yearAge, calculateAge1);
+var reuslt = ArrayCalc(age, checkAges);
+console.log("Kết quả nè::::::", age);
+console.log("Kết quả kiểm tra độ tuổi::::::", reuslt);
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+function interViewsQuestion(job) {
+    if (job === "designer") {
+        return function (name) {
+            console.log("".concat(name, " b\u1EA1n ch\u00EDnh l\u00E0 ").concat(job));
+        };
+    }
+    else if (job === "teacher") {
+        return function (name) {
+            console.log("".concat(name, " b\u1EA1n ch\u00EDnh l\u00E0 ").concat(job));
+        };
+    }
+    else {
+        console.log("Hello bạn đang làm nghề gì vậy");
+    }
+}
+var teacherQuestion = interViewsQuestion("teacher");
+var designerQuestion = interViewsQuestion("designer");
+teacherQuestion("nhan");
+console.log("-----------------------------------------------------------------");
+// Hàm trả về ngay lập tức
+console.log("-----------------------------------------------------------------");
+function game() {
+    var score = Math.random() * 10;
+    console.log(score >= 5);
+}
+game();
+(function (gooLuck) {
+    var score = Math.random() * 10;
+    console.log(score >= 5 - gooLuck);
+})(51);
 console.log("-----------------------------------------------------------------");
