@@ -69,3 +69,27 @@ console.log(john.tinhtoan(2004));
 
 // console.log("Lấy value từ key", john.birthYear); // Lấy value từ key
 // console.log("Tính toán hàm", john.tinhtoan(2004));
+console.log("-----------------------------------------------------------------");
+
+
+// challenge 3 clip 26 => 27 
+console.log("-----------------------------------------------------------------");
+
+interface abc {
+    fullName: string,
+    mass: number,
+    height: number,
+    calculator: ({ mass, height }: { mass: number, height: number }) => number;
+}
+
+const abc: abc = {
+    fullName: "Huynh Thanh Nhan",
+    mass: 92,
+    height: 1.95,
+    calculator({ mass, height }) {
+        this.bmi = this.mass / (this.height * this.height)
+        return this.bmi
+    },
+}
+
+console.log("tinh toan", abc.calculator({ height: 123, mass: 123 }));
