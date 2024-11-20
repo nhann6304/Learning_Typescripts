@@ -565,69 +565,175 @@ console.log("-----------------------------------------------------------------")
 }
 
 
+// console.log("-----------------------------------------------------------------");
+// // Bất đồng bộ
+// const second = () => {
+//     setTimeout(() => {
+//         console.log(2);
+//     }, 1000)
+// }
+
+// const first = () => {
+//     console.log(1);
+
+//     second()
+
+//     console.log(3);
+// }
+
+// first()
+
+// console.log("-----------------------------------------------------------------");
+
+
+// function getRecipe() {
+//     setTimeout(() => {
+//         const recipeId = [523, 883, 423, 974];
+//         console.log(recipeId);
+
+//         setTimeout((id: number) => {
+//             console.log("id:::", id);
+//             const recipe = { title: "ăn mì xào ", publisher: "Huỳnh Nhân" }
+
+//             console.log(`${id}: ${recipe.title}`);
+//         }, 1000, "sợ chưa")
+//     }, 1500);
+// }
+// getRecipe()
+
+// // Promise
+
+// const getIDs = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve([123, 321, 234, 543])
+
+//     }, 1500)
+
+// })
+
+// getIDs
+//     .then((id: number) => {
+//         console.log(id);
+//         return id
+//     })
+//     .then((id) => {
+//         console.log("Sai:::", id);
+//     })
+
+// /// async , await
+// async function getRecipesAw() {
+//     console.log("chòe");
+//     const IDs = await getIDs;
+//     console.log("IDs:::", IDs);
+// }
+
+// getRecipesAw()
+
 console.log("-----------------------------------------------------------------");
-// Bất đồng bộ
-const second = () => {
-    setTimeout(() => {
-        console.log(2);
-    }, 1000)
+
+
+console.log("-----------------------------------------------------------------");
+// test
+
+// class Search {
+//     private query: string;
+//     constructor(query: string) {
+//         this.query = query;
+//     }
+
+//     async getResults() {
+//         const proxy = "https://forkify-api.herokuapp.com/api/search";
+//         try {
+//             const response = await fetch(`${proxy}?q=${this.query}`);
+//             const data = await response.json();
+//             // console.log("data::::", data);
+//             console.log(data);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
+
+
+// const resultSearch = new Search("banana")
+
+// resultSearch.getResults()
+
+
+
+console.log("-----------------------------------------------------------------");
+// bài code thiếu nhi 
+
+
+
+{
+    function a(x: number) {
+        x++
+        return function () {
+            console.log(++x);
+        }
+    }
+
+    a(1)();
+    a(1)();
+    a(1)();
+
+    let x = a(1);
+    x();
+    x();
+    x();
+
+
+
+    function Name(a: string, b: string) {
+        this.a = a;
+        this.b = b;
+    }
+
+    const me = new Name("Vuong", "Nguyen");
+
+    console.log("cc", a.length);
+
+
+
+    const c = function () { }
+
+    const d = (typeof c).length;
+    console.log(d);
+    console.log(Boolean(0));
+
+
+    {
+        (function js(x) {
+            const y = (j) => j * x;
+
+
+            console.log(y(s()));
+
+            function s() {
+                return j();
+            }
+
+            function j() {
+                return x ** x
+            }
+
+        })(3)
+    }
+    var cu = 10
+    function test(...x) {
+        console.log(x);
+    }
+
+    test(2, 3, 4, 5, 6, 7, 8)
+
+    console.log(typeof []);
+    const js = { language: "loose", label: "difficult" };
+
+    const edu = { ...js }
+    console.log(Object.keys(js).length);
+
 }
-
-const first = () => {
-    console.log(1);
-
-    second()
-
-    console.log(3);
-}
-
-first()
-
 console.log("-----------------------------------------------------------------");
 
 
-function getRecipe() {
-    setTimeout(() => {
-        const recipeId = [523, 883, 423, 974];
-        console.log(recipeId);
-
-        setTimeout((id: number) => {
-            console.log("id:::", id);
-            const recipe = { title: "ăn mì xào ", publisher: "Huỳnh Nhân" }
-
-            console.log(`${id}: ${recipe.title}`);
-        }, 1000, "sợ chưa")
-    }, 1500);
-}
-getRecipe()
-
-// Promise
-
-const getIDs = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve([123, 321, 234, 543])
-
-    }, 1500)
-
-})
-
-getIDs
-    .then((id: number) => {
-        console.log(id);
-        return id
-    })
-    .then((id) => {
-        console.log("Sai:::", id);
-    })
-
-/// async , awai
-
-async function getRecipesAw() {
-    console.log("chòe");
-    const IDs = await getIDs;
-    console.log("IDs:::", IDs);
-}
-
-getRecipesAw()
-
-console.log("-----------------------------------------------------------------");
