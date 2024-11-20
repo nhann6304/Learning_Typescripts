@@ -304,7 +304,7 @@ console.log("Kết quả kiểm tra độ tuổi::::::", reuslt);
 console.log("-----------------------------------------------------------------");
 
 console.log("-----------------------------------------------------------------");
-// Return hàm 
+// Return hàm closure(Cơ chế đóng cửa)
 type job = "teacher" | "designer";
 
 function interViewsQuestion(job: job) {
@@ -331,7 +331,7 @@ teacherQuestion("nhan")
 
 console.log("-----------------------------------------------------------------");
 
-// Hàm trả về ngay lập tức
+// Hàm trả về ngay lập tức (IIFEs)
 console.log("-----------------------------------------------------------------");
 
 function game() {
@@ -346,4 +346,41 @@ game();
     console.log(score >= 5 - gooLuck);
 })(51);
 
+console.log("-----------------------------------------------------------------");
+
+console.log("-----------------------------------------------------------------");
+//Cú pháp  ES6
+const firstName = "Huỳnh";
+const lastName = "Nhân";
+const n = `${firstName} ${lastName}`;
+
+console.log("Kết quả1", n.startsWith("H")); //true
+console.log("Kết quả2", n.endsWith("H")); //false
+console.log("Kết quả3", n.includes("N")); //false
+console.log("Kết quả4", n.repeat(5)); // Lặp lại 5 lần
+
+console.log("-----------------------------------------------------------------");
+
+
+console.log("-----------------------------------------------------------------");
+// Cú pháp es5
+const box = {
+    color: "red",
+    position: 1,
+    clickMe: function () {
+        console.log(123);
+    }
+}
+console.log("-----------------------------------------------------------------");
+// Cú pháp es5
+
+const box1 = {
+    color: "blue",
+    position: 2,
+    clickMe: () => {
+        console.log(321);
+    }
+}
+box.clickMe();
+box1.clickMe();
 console.log("-----------------------------------------------------------------");
