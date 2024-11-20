@@ -1,3 +1,29 @@
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 var userName = ["Nhân", "LALALA"];
 userName.push("haha"); // Thêm vào cuối mãng
 userName.unshift("Nhân"); // Thêm vào đầu mãng 
@@ -236,7 +262,7 @@ var teacherQuestion = interViewsQuestion("teacher");
 var designerQuestion = interViewsQuestion("designer");
 teacherQuestion("nhan");
 console.log("-----------------------------------------------------------------");
-// Hàm trả về ngay lập tức
+// Hàm trả về ngay lập tức (IIFEs)
 console.log("-----------------------------------------------------------------");
 function game() {
     var score = Math.random() * 10;
@@ -247,4 +273,162 @@ game();
     var score = Math.random() * 10;
     console.log(score >= 5 - gooLuck);
 })(51);
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+//Cú pháp  ES6
+var firstName = "Huỳnh";
+var lastName = "Nhân";
+var n = "".concat(firstName, " ").concat(lastName);
+// console.log("Kết quả1", n.startsWith("H")); //true
+// console.log("Kết quả2", n.endsWith("H")); //false
+// console.log("Kết quả3", n.includes("N")); //false
+// console.log("Kết quả4", n.repeat(5)); // Lặp lại 5 lần
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// Cú pháp es5
+var box = {
+    color: "red",
+    position: 1,
+    clickMe: function () {
+        console.log(123);
+    }
+};
+console.log("-----------------------------------------------------------------");
+// Cú pháp es5
+var box1 = {
+    color: "blue",
+    position: 2,
+    clickMe: function () {
+        console.log(321);
+    }
+};
+box.clickMe();
+box1.clickMe();
+var PersonalName = ["Nhân", "Sơn", "Lặc", "Hoàng", "Chiến"];
+function Person1(name) {
+    this.name = name;
+}
+Person1.prototype.PersonalName2 = function (friends) {
+    var _this = this;
+    var arr = friends.map(function (el) {
+        return _this.name + "là bạn của tôi";
+    });
+    return arr;
+};
+console.log(new Person1("nhan").PersonalName2(PersonalName));
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// destructuring
+// khai biến
+var _a = ["Nhân", 12], userName1 = _a[0], age1 = _a[1];
+// khai key object
+{
+    var objs = {
+        firstName: "Huỳnh",
+        lastName: "Nhân"
+    };
+    var firstName_1 = objs.firstName, lastName_1 = objs.lastName;
+    console.log(firstName_1);
+    console.log(lastName_1);
+    function tinhtoanngay(year) {
+        var age = new Date().getFullYear() - year;
+        return [age, 20 - age];
+    }
+    console.log(tinhtoanngay(2024));
+}
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// Array es6
+// From
+// Array.from(arrayLike, mapFn)
+function phanmang(arr) {
+    var resultArr = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            resultArr.push.apply(resultArr, phanmang(arr[i]));
+        }
+        else {
+            resultArr.push(arr[i]);
+        }
+    }
+    return resultArr;
+}
+var phanmangxong = phanmang(Array.from([1, 2, 3, 4, [1, 2, 3, 4, 5]]));
+console.log(phanmangxong);
+//find 
+var methousFind = phanmangxong.findIndex(function (el) { return el > 4; });
+console.log("methousFind:::", methousFind);
+//findIndex
+var methousFindIndex = phanmangxong.find(function (el) { return el > 4; });
+console.log("methousFindIndex::::", methousFindIndex);
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+{
+    var arr = [2024, 2004, 2023];
+    function fnArr(arr) {
+        console.log(__spreadArray(__spreadArray([], arr, true), [2000], false));
+    }
+    fnArr(arr);
+}
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+// default Paramater
+{
+    //es5
+    function SmithPerson(firstName, lastName) {
+        firstName === undefined ? this.firstName = "Nhan khong co hahaha" : this.firstName = firstName; //Cú pháp es5
+        this.lastName = lastName;
+    }
+    var result = new SmithPerson(undefined, "nhan");
+    console.log(result);
+    //es6
+    function SmithPerson1(firstName, lastName) {
+        if (firstName === void 0) { firstName = "Nhan khong có hahaha"; }
+        this.lastName = lastName;
+    }
+    var result1 = new SmithPerson(undefined, "nhan");
+    console.log(result1);
+}
+console.log("-----------------------------------------------------------------");
+// Map
+{
+    var question = new Map();
+    console.log(question);
+    question.set("tai sao", "tại dị đó");
+    question.set(1, "ES5");
+    //get lấy ra 
+    console.log(question.get(1));
+    // has tìm
+    console.log(question.has(1));
+    // size kích thước
+    console.log("size:::", question.size);
+    // delete xóa theo vị trí
+    console.log("Xóa thành công:::", question.delete(1));
+    console.log("Xóa thành công chỉ còn:::", question);
+    // 
+    console.log("con:::::::::", question.entries());
+}
+console.log("-----------------------------------------------------------------");
+console.log("-----------------------------------------------------------------");
+//subclassed
+{
+    var Animal = /** @class */ (function () {
+        function Animal(name1) {
+            this.name1 = name1;
+            console.log("".concat(name1, " l\u00E0 \u0111\u1ED9ng v\u1EADt"));
+        }
+        return Animal;
+    }());
+    var Dog = /** @class */ (function (_super) {
+        __extends(Dog, _super);
+        function Dog(name1, tiengkeu) {
+            var _this = _super.call(this, name1) || this;
+            _this.tiengkeu = tiengkeu;
+            console.log("Con ".concat(name1, " th\u00EC s\u1EE7a ").concat(tiengkeu));
+            return _this;
+        }
+        return Dog;
+    }(Animal));
+    var result = new Dog("Chó ", "Gâu Gâu");
+}
 console.log("-----------------------------------------------------------------");

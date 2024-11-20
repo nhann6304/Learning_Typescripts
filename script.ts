@@ -1,3 +1,4 @@
+import { isCallLikeExpression } from "typescript";
 
 
 const userName: Array<string> = ["Nhân", "LALALA"];
@@ -354,10 +355,10 @@ const firstName = "Huỳnh";
 const lastName = "Nhân";
 const n = `${firstName} ${lastName}`;
 
-console.log("Kết quả1", n.startsWith("H")); //true
-console.log("Kết quả2", n.endsWith("H")); //false
-console.log("Kết quả3", n.includes("N")); //false
-console.log("Kết quả4", n.repeat(5)); // Lặp lại 5 lần
+// console.log("Kết quả1", n.startsWith("H")); //true
+// console.log("Kết quả2", n.endsWith("H")); //false
+// console.log("Kết quả3", n.includes("N")); //false
+// console.log("Kết quả4", n.repeat(5)); // Lặp lại 5 lần
 
 console.log("-----------------------------------------------------------------");
 
@@ -383,4 +384,189 @@ const box1 = {
 }
 box.clickMe();
 box1.clickMe();
+
+const PersonalName = ["Nhân", "Sơn", "Lặc", "Hoàng", "Chiến"];
+
+function Person1(name: string) {
+    this.name = name
+}
+
+
+Person1.prototype.PersonalName2 = function (friends: Array<string>) {
+    const arr = friends.map(el => {
+        return this.name + "là bạn của tôi"
+    })
+    return arr
+}
+
+console.log(new Person1("nhan").PersonalName2(PersonalName));
+
 console.log("-----------------------------------------------------------------");
+
+console.log("-----------------------------------------------------------------");
+// destructuring
+// khai biến
+const [userName1, age1] = ["Nhân", 12];
+// khai key object
+{
+    const objs = {
+        firstName: "Huỳnh",
+        lastName: "Nhân"
+    };
+
+    const { firstName, lastName } = objs;
+
+    console.log(firstName);
+
+
+    console.log(lastName);
+
+
+    function tinhtoanngay(year: number) {
+        const age = new Date().getFullYear() - year;
+        return [age, 20 - age]
+    }
+
+    console.log(tinhtoanngay(2024));
+}
+
+console.log("-----------------------------------------------------------------");
+
+console.log("-----------------------------------------------------------------");
+// Array es6
+// From
+// Array.from(arrayLike, mapFn)
+
+
+function phanmang<T>(arr: Array<any>) {
+    let resultArr: Array<any> = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            resultArr.push(...phanmang(arr[i]))
+        } else {
+            resultArr.push(arr[i])
+        }
+    }
+    return resultArr;
+}
+
+
+
+
+const phanmangxong = phanmang(Array.from([1, 2, 3, 4, [1, 2, 3, 4, 5]]))
+console.log(phanmangxong);
+
+//find 
+const methousFind = phanmangxong.findIndex(el => el > 4)
+console.log("methousFind:::", methousFind);
+//findIndex
+const methousFindIndex = phanmangxong.find(el => el > 4)
+console.log("methousFindIndex::::", methousFindIndex);
+
+console.log("-----------------------------------------------------------------");
+
+
+console.log("-----------------------------------------------------------------");
+
+{
+    const arr = [2024, 2004, 2023];
+
+    function fnArr(arr: Array<number>) {
+        console.log([...arr, 2000]);
+    }
+
+    fnArr(arr);
+}
+
+
+console.log("-----------------------------------------------------------------");
+
+
+
+console.log("-----------------------------------------------------------------");
+// default Paramater
+{
+    //es5
+    function SmithPerson(firstName: string | undefined, lastName: string) {
+
+        firstName === undefined ? this.firstName = "Nhan khong co hahaha" : this.firstName = firstName; //Cú pháp es5
+
+        this.lastName = lastName;
+
+    }
+
+    const result = new SmithPerson(undefined, "nhan")
+
+    console.log(result);
+
+
+    //es6
+    function SmithPerson1(firstName: string = "Nhan khong có hahaha", lastName: string) {
+        this.lastName = lastName;
+
+    }
+
+    const result1 = new SmithPerson(undefined, "nhan")
+
+    console.log(result1);
+}
+
+console.log("-----------------------------------------------------------------");
+
+// Map
+{
+    const question = new Map()
+
+    console.log(question);
+
+    question.set("tai sao", "tại dị đó")
+
+    question.set(1, "ES5")
+
+    //get lấy ra 
+    console.log(question.get(1));
+    // has tìm
+    console.log(question.has(1));
+    // size kích thước
+    console.log("size:::", question.size);
+    // delete xóa theo vị trí
+    console.log("Xóa thành công:::", question.delete(1));
+    console.log("Xóa thành công chỉ còn:::", question);
+    // 
+
+    console.log("con:::::::::", question.entries());
+}
+
+console.log("-----------------------------------------------------------------");
+
+
+console.log("-----------------------------------------------------------------");
+//subclassed
+
+
+{
+
+
+    class Animal {
+        constructor(private name1: string) {
+            console.log(`${name1} là động vật`);
+        }
+    }
+
+    class Dog extends Animal {
+        constructor(name1: string, private tiengkeu: string) {
+            super(name1)
+            console.log(`Con ${name1} thì sủa ${tiengkeu}`);
+        }
+    }
+
+    const result = new Dog("Chó ", "Gâu Gâu");
+
+}
+
+
+console.log("-----------------------------------------------------------------");
+
+
+
+
