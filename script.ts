@@ -566,7 +566,68 @@ console.log("-----------------------------------------------------------------")
 
 
 console.log("-----------------------------------------------------------------");
+// Bất đồng bộ
+const second = () => {
+    setTimeout(() => {
+        console.log(2);
+    }, 1000)
+}
+
+const first = () => {
+    console.log(1);
+
+    second()
+
+    console.log(3);
+}
+
+first()
+
+console.log("-----------------------------------------------------------------");
 
 
+function getRecipe() {
+    setTimeout(() => {
+        const recipeId = [523, 883, 423, 974];
+        console.log(recipeId);
 
+        setTimeout((id: number) => {
+            console.log("id:::", id);
+            const recipe = { title: "ăn mì xào ", publisher: "Huỳnh Nhân" }
 
+            console.log(`${id}: ${recipe.title}`);
+        }, 1000, "sợ chưa")
+    }, 1500);
+}
+getRecipe()
+
+// Promise
+
+const getIDs = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve([123, 321, 234, 543])
+
+    }, 1500)
+
+})
+
+getIDs
+    .then((id: number) => {
+        console.log(id);
+        return id
+    })
+    .then((id) => {
+        console.log("Sai:::", id);
+    })
+
+/// async , awai
+
+async function getRecipesAw() {
+    console.log("chòe");
+    const IDs = await getIDs;
+    console.log("IDs:::", IDs);
+}
+
+getRecipesAw()
+
+console.log("-----------------------------------------------------------------");
