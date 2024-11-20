@@ -737,3 +737,38 @@ console.log("-----------------------------------------------------------------")
 console.log("-----------------------------------------------------------------");
 
 
+console.log("-----------------------------------------------------------------");
+// design patten
+
+{
+    // function tính toán
+    function dayPrice(originalPrice: number) {
+        return originalPrice * 0.8;
+    }
+    //  bắt đầu 
+
+    const getPriceStraegies = {
+        preOrder: dayPrice,
+    }
+
+
+    function getPrice(originalPrice: number, typePromotion: string) {
+        const a = getPriceStraegies[typePromotion]
+        console.log("a::::", a);
+        return getPriceStraegies[typePromotion](originalPrice)
+    }
+
+    console.log(getPrice(200, "preOrder"));
+
+}
+
+
+
+const test1 = {
+    name1: "Nhan",
+    age: 20,
+    getName: (cc: string) => {
+        return cc
+    }
+}
+console.log("-----------------------------------------------------------------");
