@@ -771,4 +771,10 @@ const test1 = {
         return cc
     }
 }
+
+
+console.log(test1["name1"]);
+
+console.log(test1["getName"]("con cu"));
+
 console.log("-----------------------------------------------------------------");
