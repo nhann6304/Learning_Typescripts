@@ -5,14 +5,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon script.ts",
-    "start": "nodemon es6/object.ts"
+    "start": "nodemon es6/object.ts",
+    "start:node": "nodemon nodejs/node.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.21.1",
     "nodemon": "^3.1.7",
     "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.1"
   }
 }
