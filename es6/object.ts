@@ -43,7 +43,7 @@ console.log("-----------------------------------------------------------------")
 console.log("-----------------------------------------------------------------");
 //Array
 
-const arrNumber: Array<number> = [1, 2, 3, 2, 2, 4, 5, 6, 7]
+const arrNumber: Array<number> = [1, 2, 3, 4, 5, 6, 7]
 const arrString: Array<string> = ["T", "N", "S", "W", "G", "🐣"];
 
 // // ghép mãng concat(); 
@@ -96,6 +96,77 @@ console.log(seen.has(0));
 // }
 
 // console.log(newArr); // Kết quả: [2, 3]
+console.log("-----------------------------------------------------------------");
+
+function containsDuplicate(nums: number[]): boolean {
+    const mySet = new Set<number>()
+
+    for (const value of nums) {
+        if (!mySet.has(value)) {
+            mySet.add(value)
+        } else {
+            return true
+        }
+    }
+    return false
+};
+
+
+console.log(
+    containsDuplicate(arrNumber)
+);
 
 
 console.log("-----------------------------------------------------------------");
+// leet code 
+{
+    function removeElement(nums: number[], val: number): any {
+        let k = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] !== val) {
+                nums[k] = nums[i];
+                k++
+            }
+        };
+        return k
+    }
+
+
+    const arr = [0, 1, 2, 2, 3, 0, 4, 2];
+    const k = 2;
+
+
+}
+
+// let code 
+
+console.log("-----------------------------------------------------------------");
+
+{
+    function removeDuplicates(nums: number[]): number {
+        let k = 0;
+
+        for (let i = 1; i < nums.length; i++) {
+            if (nums[i] !== nums[k]) {
+                k++;
+                nums[k] = nums[i];
+            }
+        }
+        return k + 1
+
+    };
+    const arr = [1, 1, 2];
+
+    console.log(
+        removeDuplicates(arr)
+
+    );
+}
+
+console.log("-----------------------------------------------------------------");
+
+
+
+
+
+
