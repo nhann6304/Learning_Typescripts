@@ -8,7 +8,7 @@ import { IData } from "./src/interface/data.interface";
 import { logger } from "./src/middleware/logger.middleware";
 import { auth } from "./src/middleware/auth.middleware";
 import morgan from "morgan";
-import swaggerJSDoc from "swagger-jsdoc";
+import rtAuth from "./src/routes/auth.routes";
 // {
 //     //path
 //     const first = readFileSync("./nodejs/src/test.txt", "utf-8")
@@ -59,8 +59,17 @@ const server = express();
     })
 
 
-
+    //morgan
     server.use(morgan("tiny"))
+    // Check truyền body
+    server.use(express.urlencoded({ extended: true }))
+    // Dùng để parse dữ liệu JSON phía frond-end trả xuống
+    server.use(express.json())
+
+    //  Các Router 
+    server.use("/api/v1/auth", rtAuth)
+
+
 
     server.get("/api/v1", (req: Request, res: Response) => {
         res.status(200).send({
@@ -68,15 +77,6 @@ const server = express();
             metadata: people
         })
     })
-
-    server.post("/api/v1/create", (req: Request, res: Response) => {
-        console.log(req.body); // Kiểm tra dữ liệu trong body
-        const { user_email } = req.body;
-        console.log(user_email);
-        res.send("User email logged");
-    });
-
-
 
     //Param thì phải có dấu :sau trường đó
     server.get("/api/product/:id", (req: Request, res: Response) => {
