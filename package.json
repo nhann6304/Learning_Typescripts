@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui": "^3.52.4",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongoose": "^8.8.2",
     "morgan": "^1.10.0",

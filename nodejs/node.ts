@@ -2,7 +2,7 @@
 // import path from "path"
 // import http from "http"
 // import { readFileSync, writeFileSync } from "fs"
-import express, { NextFunction, Request, Response } from "express"
+import express, { NextFunction, Request, Response } from "express";
 import { people, products } from "./src/data/data";
 import { IData } from "./src/interface/data.interface";
 import { logger } from "./src/middleware/logger.middleware";
@@ -11,13 +11,12 @@ import morgan from "morgan";
 import rtAuth from "./src/routes/common/auth.routes";
 import rtTasks from "./src/routes/models/tasks.routes";
 import { db } from "./src/config/mysql.config";
+import { connectDb } from "./src/config/mongoose.config";
 // {
 //     //path
 //     const first = readFileSync("./nodejs/src/test.txt", "utf-8")
 
-
 //     console.log(testFn<string>(first));
-
 
 //     writeFileSync("./nodejs/src/vietra.txt", "co gan len nha ");
 // }
@@ -40,7 +39,9 @@ import { db } from "./src/config/mysql.config";
 //     //     console.log("server is running port 8001");
 //     // })
 // }
-console.log("-------------------------------------------------------------------------------");
+console.log(
+    "-------------------------------------------------------------------------------"
+);
 //express leaning
 
 // Các phương thức server.get => 1
@@ -51,29 +52,34 @@ console.log("-------------------------------------------------------------------
 // Các phương thức server.use => 6
 // Các phương thức server.lister =>7
 
-
 // 7 Lắng nghe trên cổng
 const port = 5500;
 const server = express();
 {
-    server.listen(port, function () {
-        console.log(`server has running port ${port}`);
-    })
+    const start = async () => {
+        try {
+            await connectDb()
+            server.listen(port, function () {
+                console.log(`server has running port ${port}`);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    start()
 
 
     //morgan
-    server.use(morgan("tiny"))
+    server.use(morgan("tiny"));
     // Check truyền body
-    server.use(express.urlencoded({ extended: true }))
+    server.use(express.urlencoded({ extended: true }));
     // Dùng để parse dữ liệu JSON phía frond-end trả xuống
-    server.use(express.json())
+    server.use(express.json());
 
-    //  Các Router 
-    server.use("/api/v1/auth", rtAuth)
+    //  Các Router
+    server.use("/api/v1/auth", rtAuth);
     // middlewares
-    server.use("/api/v1/task", rtTasks)
-
-
+    server.use("/api/v1/task", rtTasks);
 
     // server.get("/api/products", (req: Request, res: Response) => {
     //     db.query("SELECT * FROM users", (err, results) => {
@@ -85,57 +91,49 @@ const server = express();
     //     });
     // });
 
-
-
     server.get("/api/v1", (req: Request, res: Response) => {
         res.status(200).send({
             success: true,
-            metadata: people
-        })
-    })
+            metadata: people,
+        });
+    });
 
     //Param thì phải có dấu :sau trường đó
     server.get("/api/product/:id", (req: Request, res: Response) => {
-        const { id: param } = req.params
-        const result = products.find((product) => product.id === +param)
+        const { id: param } = req.params;
+        const result = products.find((product) => product.id === +param);
 
         if (!result) {
-            res.send("<h1>Product not exist</h1>")
+            res.send("<h1>Product not exist</h1>");
         }
 
         res.json(result);
-
-    })
-    //Param lồng 
+    });
+    //Param lồng
     server.get("/api/product/:id/detail/:ids", (req: Request, res: Response) => {
         console.log(req.params);
 
-        res.send("Param")
-    })
-    // query 
+        res.send("Param");
+    });
+    // query
     server.get("/api/query", (req: Request, res: Response) => {
         console.log(req.query);
-        let sortedProducts: IData[] = [...products]
+        let sortedProducts: IData[] = [...products];
         const { search, limit } = req.query;
 
-        sortedProducts = sortedProducts.filter((item) => item.name.startsWith(search as string))
-        sortedProducts = sortedProducts.slice(0, +limit)
-
+        sortedProducts = sortedProducts.filter((item) =>
+            item.name.startsWith(search as string)
+        );
+        sortedProducts = sortedProducts.slice(0, +limit);
 
         res.status(200).json(sortedProducts);
-    })
+    });
 
     server.all("*", (req: Request, res: Response) => {
-        res.send("<h1>Oops 404</h1>")
-    })
-
-
+        res.send("<h1>Oops 404</h1>");
+    });
 }
 
-
-
-
-
-console.log("-------------------------------------------------------------------------------");
-
-
+console.log(
+    "-------------------------------------------------------------------------------"
+);

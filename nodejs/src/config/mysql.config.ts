@@ -11,8 +11,8 @@ export const db = mysql.createPool({
 
 db.getConnection((err, connection) => {
     if (err) {
-        console.log("connect db fail!!", err);
+        console.log("connect db mysql fail!!", err);
     }
 
-    console.log("Connect db success !!");
+    console.log("Connect  mysql success !!");
 })
