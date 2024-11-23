@@ -8,7 +8,9 @@ import { IData } from "./src/interface/data.interface";
 import { logger } from "./src/middleware/logger.middleware";
 import { auth } from "./src/middleware/auth.middleware";
 import morgan from "morgan";
-import rtAuth from "./src/routes/auth.routes";
+import rtAuth from "./src/routes/common/auth.routes";
+import rtTasks from "./src/routes/models/tasks.routes";
+import { db } from "./src/config/mysql.config";
 // {
 //     //path
 //     const first = readFileSync("./nodejs/src/test.txt", "utf-8")
@@ -68,6 +70,20 @@ const server = express();
 
     //  Các Router 
     server.use("/api/v1/auth", rtAuth)
+    // middlewares
+    server.use("/api/v1/task", rtTasks)
+
+
+
+    server.get("/api/products", (req: Request, res: Response) => {
+        db.query("SELECT * FROM users", (err, results) => {
+            if (err) {
+                console.error("Lỗi khi truy vấn MySQL:", err.message);
+                return res.status(500).json({ success: false, error: err.message });
+            }
+            res.status(200).json({ success: true, metadata: results });
+        });
+    });
 
 
 

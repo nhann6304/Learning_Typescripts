@@ -1,14 +1,10 @@
 import express, { Request, Response } from "express";
-import { people } from "../data/data";
+import { people } from "../../data/data";
+import { create } from "../../controller/auth.controller";
 
 const router = express.Router();
 
-router.post("/create", (req: Request, res: Response) => {
-    console.log(req.body);
-    const { user_email } = req.body;
-    console.log(user_email);
-    res.send("User email logged");
-});
+router.post("/create", create);
 
 router.patch("/update/:id", (req: Request, res: Response) => {
     const { id } = req.params;
@@ -31,9 +27,7 @@ router.patch("/update/:id", (req: Request, res: Response) => {
 
 router.delete("/delete/:id", (req: Request, res: Response) => {
     const { id } = req.params;
-
     const newPeople = people.filter((item) => item.id !== +id);
-
     res.status(200).send({
         newPeople,
     });
