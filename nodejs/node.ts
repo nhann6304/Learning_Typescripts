@@ -75,15 +75,15 @@ const server = express();
 
 
 
-    server.get("/api/products", (req: Request, res: Response) => {
-        db.query("SELECT * FROM users", (err, results) => {
-            if (err) {
-                console.error("Lỗi khi truy vấn MySQL:", err.message);
-                return res.status(500).json({ success: false, error: err.message });
-            }
-            res.status(200).json({ success: true, metadata: results });
-        });
-    });
+    // server.get("/api/products", (req: Request, res: Response) => {
+    //     db.query("SELECT * FROM users", (err, results) => {
+    //         if (err) {
+    //             console.error("Lỗi khi truy vấn MySQL:", err.message);
+    //             return res.status(500).json({ success: false, error: err.message });
+    //         }
+    //         res.status(200).json({ success: true, metadata: results });
+    //     });
+    // });
 
 
 
