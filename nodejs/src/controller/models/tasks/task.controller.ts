@@ -37,10 +37,13 @@ export const findAllTask = async (
     }
 };
 
-export const updateTask = (req: Request, res: Response) => {
+export const updateTask = async (req: Request, res: Response) => {
+    const { id } = req.query;
+    const value: ITask = req.body;
+    const result = await taskRepository.findByIdAndUpdate({ _id: id }, { ...value }, { new: true });
     new OK({
         message: "Update Task Success!!",
-        metadata: [],
+        metadata: result,
     }).send(res);
 };
 

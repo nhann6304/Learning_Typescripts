@@ -8,5 +8,6 @@ export interface Ires<T = any> {
     metadata?: T;
     statusCode?: number;
     reasonStatusCode?: string,
+    totalItem?: number
     option?: any;
 }

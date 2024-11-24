@@ -8,9 +8,16 @@ class SuccessApi implements Ires {
     metadata: any;
     option?: any;
     reasonStatusCode: string;
+    totalItem?: number;
     statusCode: number;
     // Methoud
+
+
+
     send(res: Response, headers = {}) {
+        if (Array.isArray(this.metadata)) {
+            this.totalItem = this.metadata.length
+        }
         return res.status(this.statusCode).json(this);
     }
     constructor({ message, statusCode, metadata, option, reasonStatusCode }: Ires) {
