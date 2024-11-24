@@ -94,44 +94,10 @@ const server = express();
 
     server.get("/api/v1", (req: Request, res: Response) => {
         res.status(200).send({
-            success: true,
-            metadata: people,
+            metadata: "hello word",
         });
     });
 
-    //Param thì phải có dấu :sau trường đó
-    server.get("/api/product/:id", (req: Request, res: Response) => {
-        const { id: param } = req.params;
-        const result = products.find((product) => product.id === +param);
-
-        if (!result) {
-            res.send("<h1>Product not exist</h1>");
-        }
-
-        res.json(result);
-    });
-    //Param lồng
-    server.get("/api/product/:id/detail/:ids", (req: Request, res: Response) => {
-        console.log(req.params);
-
-        res.send("Param")
-    });
-    // query
-    server.get("/api/query", (req: Request, res: Response) => {
-        let sortedProducts: IData[] = [...products];
-        const { search, limit } = req.query;
-
-        sortedProducts = sortedProducts.filter((item) =>
-            item.name.startsWith(search as string)
-        );
-        sortedProducts = sortedProducts.slice(0, +limit);
-
-        res.status(200).json(sortedProducts);
-    });
-
-    server.all("*", (req: Request, res: Response) => {
-        res.send("<h1>Oops 404</h1>");
-    });
 }
 
 console.log(
