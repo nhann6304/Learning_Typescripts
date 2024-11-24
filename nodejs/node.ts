@@ -113,11 +113,10 @@ const server = express();
     server.get("/api/product/:id/detail/:ids", (req: Request, res: Response) => {
         console.log(req.params);
 
-        res.send("Param");
+        res.send("Param")
     });
     // query
     server.get("/api/query", (req: Request, res: Response) => {
-        console.log(req.query);
         let sortedProducts: IData[] = [...products];
         const { search, limit } = req.query;
 
