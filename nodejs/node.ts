@@ -10,6 +10,7 @@ import { auth } from "./src/middleware/auth.middleware";
 import morgan from "morgan";
 import rtAuth from "./src/routes/common/auth.routes";
 import rtTasks from "./src/routes/models/tasks.routes";
+import rtProducts from "./src/routes/models/product.routes";
 import { db } from "./src/config/mysql.config";
 import { connectDb } from "./src/config/mongoose.config";
 // {
@@ -78,8 +79,8 @@ const server = express();
 
     //  Các Router
     server.use("/api/v1/auth", rtAuth);
-    // middlewares
     server.use("/api/v1/task", rtTasks);
+    server.use("/api/v1/products", rtProducts)
 
     // server.get("/api/products", (req: Request, res: Response) => {
     //     db.query("SELECT * FROM users", (err, results) => {

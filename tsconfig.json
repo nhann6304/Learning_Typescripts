@@ -5,6 +5,7 @@
     "target": "es2021",
     "moduleResolution": "node",
     "sourceMap": true,
+    "resolveJsonModule": true,
     "outDir": "build",
     "lib": ["ES2021", "DOM"]
   }

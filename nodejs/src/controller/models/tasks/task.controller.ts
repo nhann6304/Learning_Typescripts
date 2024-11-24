@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { ITask } from "../../../interface/models/task.interface";
-import TaskSchema from "../../../models/models/task";
 import { Ires } from "../../../interface/common/response.interface";
 import { CREATE, OK } from "../../../core/success.response";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { TaskSchema } from "../../../models/models/task.schema";
 
 const taskRepository = mongoose.model<ITask>("tasks", TaskSchema);
 
