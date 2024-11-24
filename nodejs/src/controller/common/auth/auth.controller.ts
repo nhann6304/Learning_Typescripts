@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { IUser } from "../../../interface/common/user.interface";
 import { OK } from "../../../core/success.response";
 import { StatusCodes } from "http-status-codes";
+import { sign } from "jsonwebtoken";
+import { SignJWT } from "../../../config/jwt.config";
 
 
 
@@ -16,9 +18,14 @@ export const create = (req: Request<{}, {}, IUser, {}>, res: Response) => {
         }).send(res)
         return;
     }
+    const id = new Date().getDay();
+    const payload = { id, user_name }
+    const token = SignJWT(payload)
+    console.log(token);
+
     new OK({
         message: "Login Success",
-        metadata: user_name
+        metadata: [{ id, token }]
     }).send(res)
 
 
