@@ -23,7 +23,6 @@ export const mockupDelete = async (req: Request, res: Response) => {
 
 export const findProduct = async (req: Request, res: Response) => {
     const { id, name, fields, limit = 10, page = 1, ...query } = req.query;
-    console.log(fields);
     const a = fields as string;
     const fieldsList = a?.split(",").join(" ");
     //pagination
@@ -37,7 +36,7 @@ export const findProduct = async (req: Request, res: Response) => {
                 .select(`${fieldsList}`)) as any;
         } else {
             result = await productRepository
-                .find({ ...query })
+                .find({ ...query, price: { $gt: 100 } })
                 .select(`${fieldsList}`)
                 .limit(+limit)
                 .skip(skip);
