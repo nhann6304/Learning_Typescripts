@@ -7,3 +7,23 @@ export const create = async (req: Request, res: Response) => {
         message: "Oke"
     }).send(res)
 }
+
+
+export const find = async (req: Request, res: Response) => {
+    new OK({
+        message: "Oke"
+    }).send(res)
+}
+
+export const update = async (req: Request, res: Response) => {
+    new OK({
+        message: "Oke"
+    }).send(res)
+}
+
+
+export const deleted = async (req: Request, res: Response) => {
+    new OK({
+        message: "Oke"
+    }).send(res)
+}
