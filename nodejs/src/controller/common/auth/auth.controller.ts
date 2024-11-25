@@ -3,9 +3,7 @@ import { IUser } from "../../../interface/common/user.interface";
 import { OK } from "../../../core/success.response";
 import { StatusCodes } from "http-status-codes";
 import { sign } from "jsonwebtoken";
-import { SignJWT } from "../../../config/jwt.config";
-
-
+import { decodeJwt, SignJWT } from "../../../config/jwt.config";
 
 export const create = (req: Request<{}, {}, IUser, {}>, res: Response) => {
     // Request < Params = { }, ResBody = any, ReqBody = any, Query = any >
@@ -21,12 +19,14 @@ export const create = (req: Request<{}, {}, IUser, {}>, res: Response) => {
     const id = new Date().getDay();
     const payload = { id, user_name }
     const token = SignJWT(payload)
-    console.log(token);
+    const me = decodeJwt(token);
 
     new OK({
         message: "Login Success",
-        metadata: [{ id, token }]
+        metadata: [{
+            id,
+            token,
+            me
+        }]
     }).send(res)
-
-
 };
