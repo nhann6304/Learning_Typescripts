@@ -11,6 +11,7 @@ import morgan from "morgan";
 import rtAuth from "./src/routes/common/auth.routes";
 import rtTasks from "./src/routes/models/tasks.routes";
 import rtProducts from "./src/routes/models/product.routes";
+import rtJobs from "./src/routes/models/jobs.routes";
 import { db } from "./src/config/mysql.config";
 import { connectDb } from "./src/config/mongoose.config";
 // {
@@ -59,7 +60,7 @@ const server = express();
 {
     const start = async () => {
         try {
-            await connectDb()
+            await connectDb();
             server.listen(port, function () {
                 console.log(`server has running port ${port}`);
             });
@@ -80,6 +81,7 @@ const server = express();
     //  Các Router
     server.use("/api/v1/auth", rtAuth);
     server.use("/api/v1/task", rtTasks);
+    server.use("/api/v1/jobs", rtJobs);
     server.use("/api/v1/products", rtProducts)
 
     // server.get("/api/products", (req: Request, res: Response) => {
