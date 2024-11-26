@@ -44,46 +44,53 @@ export const register = async (
         }).send(res);
     }
 };
-
 export const login = async (req: CustomRequest<{}, {}, IUser, {}>, res: Response) => {
     const { user_email, user_pass } = req.body;
-    let token: string
-    try {
-        if (!user_email || !user_pass) {
-            new OK({ message: "Email or Password not exits" }).send(res);
-        }
 
+    if (!user_email || !user_pass) {
+        new OK({ message: "Email or Password not exists" }).send(res);
+        return;
+    }
+
+    try {
         const user: IUser = await userRepository.findOne({ user_email });
 
+        if (!user) {
+            new OK({ message: "User not exists" }).send(res);
+            return;
+        }
 
-        if (!user_email || !user_pass) {
-            new OK({ message: "User not exits" }).send(res);
-        }
         const isPassword = await comparePassword(user.user_pass, user_pass);
-        if (isPassword) {
-            token = SignJWT({
-                _id: user._id,
-                user_email: user.user_email,
-            });
-            res.cookie("token", token, {
-                maxAge: 5 * 60 * 1000,
-                httpOnly: true,
-            });
+
+        if (!isPassword) {
+            new OK({ message: "Mật khẩu sai" }).send(res);
+            return;
         }
+
+        const token = SignJWT({
+            _id: user._id,
+            user_email: user.user_email,
+        });
+
+        res.cookie("token", token, {
+            maxAge: 5 * 60 * 1000,
+            httpOnly: true,
+        });
+
         new OK({
             message: "Login success",
-            metadata: {
-                token
-            }
+            metadata: { token },
         }).send(res);
+
     } catch (error) {
         new OK({
-            message: "Login flailed!!!",
+            message: "Login failed!!!",
             metadata: error,
             statusCode: StatusCodes.BAD_REQUEST,
         }).send(res);
     }
 };
+
 
 export const logout = async (req: Request, res: Response) => {
     try {

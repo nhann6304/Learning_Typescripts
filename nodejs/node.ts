@@ -15,6 +15,12 @@ import rtJobs from "./src/routes/models/jobs.routes";
 import { db } from "./src/config/mysql.config";
 import { connectDb } from "./src/config/mongoose.config";
 import cookieParser from "cookie-parser";
+import swaggerUI from "swagger-ui-express"
+import YAML from "yamljs"
+import fs from "fs"
+import path from "path";
+import swaggerJsdoc from "swagger-jsdoc";
+
 // {
 //     //path
 //     const first = readFileSync("./nodejs/src/test.txt", "utf-8")
@@ -71,6 +77,23 @@ const server = express();
     };
     start()
 
+    //swagger 
+    // const file = fs.readFileSync(path.resolve("./swagger.yaml"), "utf-8")
+    // const swaggerDocument = YAML.parse(file)
+    // server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+    // const option: swaggerJsdoc.Options = {
+    //     definition: {
+    //         openapi: "3.0.0",
+    //         info: {
+    //             title: "Hello Nodejs",
+    //             version: "1.0.0"
+    //         },
+    //     },
+    //     "apis": ["./swagger.yaml"]
+    // }
+    // const openapiSpecification = swaggerJsdoc(option)
+    // server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(openapiSpecification))
+
 
     //morgan
     server.use(morgan("tiny"));
@@ -102,6 +125,7 @@ const server = express();
             metadata: "hello word",
         });
     });
+
 
 }
 

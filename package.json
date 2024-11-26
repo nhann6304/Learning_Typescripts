@@ -19,6 +19,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui": "^3.52.4",
+    "@types/yamljs": "^0.2.34",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
@@ -33,7 +34,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui": "^5.18.2",
     "swagger-ui-express": "^5.0.1",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
