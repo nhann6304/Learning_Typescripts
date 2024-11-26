@@ -11,3 +11,5 @@ export interface Ires<T = any> {
     totalItem?: number
     option?: any;
 }
+
+

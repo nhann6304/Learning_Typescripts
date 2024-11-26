@@ -14,6 +14,7 @@ import rtProducts from "./src/routes/models/product.routes";
 import rtJobs from "./src/routes/models/jobs.routes";
 import { db } from "./src/config/mysql.config";
 import { connectDb } from "./src/config/mongoose.config";
+import cookieParser from "cookie-parser";
 // {
 //     //path
 //     const first = readFileSync("./nodejs/src/test.txt", "utf-8")
@@ -77,6 +78,8 @@ const server = express();
     server.use(express.urlencoded({ extended: true }));
     // Dùng để parse dữ liệu JSON phía frond-end trả xuống
     server.use(express.json());
+    // Cookie 
+    server.use(cookieParser())
 
     //  Các Router
     server.use("/api/v1/auth", rtAuth);

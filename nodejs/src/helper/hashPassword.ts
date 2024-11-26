@@ -7,3 +7,7 @@ export const hashPassword = async (pass_hien_tai: string) => {
     return passwordHash
 }
 
+export const comparePassword = async (pass_ma_hoa: string, pass_hien_tai): Promise<boolean> => {
+    const isMatch = await bcrypt.compare(pass_hien_tai, pass_ma_hoa);
+    return isMatch
+}

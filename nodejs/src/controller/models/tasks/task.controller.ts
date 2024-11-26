@@ -40,6 +40,7 @@ export const findAllTask = async (
 export const updateTask = async (req: Request, res: Response) => {
     const { id } = req.query;
     const value: ITask = req.body;
+    console.log("Value:::", value);
     const result = await taskRepository.findByIdAndUpdate({ _id: id }, { ...value }, { new: true });
     new OK({
         message: "Update Task Success!!",
