@@ -20,6 +20,10 @@ export const productSchema = new mongoose.Schema<IProduct>({
         type: Number,
         default: 4.5
     },
+    image: {
+        type: String,
+        required: true
+    },
     createAt: {
         type: Date,
         default: Date.now()

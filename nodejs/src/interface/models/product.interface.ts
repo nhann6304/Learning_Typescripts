@@ -5,6 +5,7 @@ export interface IProduct {
     price: number,
     featured?: boolean,
     rating: number,
-    createAt?: Date
+    createAt?: Date,
+    image: string
     company: EProduct | string
 }

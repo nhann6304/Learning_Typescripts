@@ -5,6 +5,9 @@ import { CREATE, OK } from "../../../core/success.response";
 import data from "../../../data/product.data.json";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { CustomRequest } from "../../../interface/common/request.interface";
+import path from "path";
+import fileUpload from "express-fileupload";
 const productRepository = mongoose.model<IProduct>("products", productSchema);
 
 export const mockupData = async (req: Request, res: Response) => {
@@ -52,3 +55,28 @@ export const findProduct = async (req: Request, res: Response) => {
         }).send(res);
     }
 };
+
+export const createProduct = async (req: CustomRequest<{}, {}, IProduct, {}>, res: Response) => {
+    const productImage: any = req.files.image;
+    const { ...data } = req.body;
+    const imagePath = path.resolve(__dirname, "../../../public/uploads", productImage.name);
+    await productImage.mv(imagePath)
+    const image = `./uploads/${productImage.name}`
+    const items = await productRepository.create({ image, ...data });
+    new CREATE({
+        message: "Create Product Success",
+        metadata: items
+    }).send(res)
+}
+
+
+export const uploadProductImage = async (req: CustomRequest, res: Response) => {
+    const productImage: any = req.files.image;
+    // console.log(path.resolve(__dirname, "../../../public/uploads"));
+
+    new CREATE({
+        message: "Upload Image Success",
+        metadata: ({ image: { src: `./uploads/${productImage.name}` } })
+    }).send(res)
+}
+

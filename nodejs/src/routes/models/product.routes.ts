@@ -7,5 +7,8 @@ const router = express.Router();
 router.use(auth);
 router.route("/mockup/create").post(ProductController.mockupData)
 router.route("/mockup/delete").delete(ProductController.mockupDelete)
+router.route("/create").post(ProductController.createProduct)
 router.route("/find").get(ProductController.findProduct)
+router.route("/find").get(ProductController.findProduct)
+router.route("/upload-image").post(ProductController.uploadProductImage)
 export default router

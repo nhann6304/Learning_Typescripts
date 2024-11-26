@@ -20,6 +20,8 @@ import YAML from "yamljs"
 import fs from "fs"
 import path from "path";
 import swaggerJsdoc from "swagger-jsdoc";
+import fileUpload from "express-fileupload";
+
 
 // {
 //     //path
@@ -103,12 +105,14 @@ const server = express();
     server.use(express.json());
     // Cookie 
     server.use(cookieParser())
-
+    // upload file
+    server.use(fileUpload());
     //  Các Router
     server.use("/api/v1/auth", rtAuth);
     server.use("/api/v1/task", rtTasks);
     server.use("/api/v1/jobs", rtJobs);
     server.use("/api/v1/products", rtProducts)
+
 
     // server.get("/api/products", (req: Request, res: Response) => {
     //     db.query("SELECT * FROM users", (err, results) => {
