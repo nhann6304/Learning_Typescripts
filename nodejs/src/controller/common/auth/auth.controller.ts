@@ -131,14 +131,14 @@ export const sendMail = async (req: CustomRequest, res: Response) => {
             port: 587,
             secure: false,
             auth: {
-                user: "huynhthanhnhan632004@gmail.com",
-                pass: "txdf iklb zzhm snci",
+                user: process.env.EMAIL_SEND,
+                pass: process.env.PASSWORD_EMAIL_SEND,
             },
         });
 
         const info = await transporter.sendMail({
             from: '"Cuahangsach" <no-reply@cuahangsach.com>',
-            to: "thanhnhan0063426@gmail.com",
+            to: "fakeEmail@gmail.com",
             subject: subject,
             html: "<h1>Hi</h1>",
         });
