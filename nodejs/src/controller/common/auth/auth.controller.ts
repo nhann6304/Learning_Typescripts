@@ -5,6 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import { sign } from "jsonwebtoken";
 import { decodeJwt, SignJWT } from "../../../config/jwt.config";
 import mongoose from "mongoose";
+import nodemailer from "nodemailer";
 import { userSchema } from "../../../models/common/user.schema";
 import { comparePassword, hashPassword } from "../../../helper/hashPassword";
 import { ok } from "assert";
@@ -73,7 +74,7 @@ export const login = async (req: CustomRequest<{}, {}, IUser, {}>, res: Response
         });
 
         res.cookie("token", token, {
-            maxAge: 5 * 60 * 1000,
+            maxAge: 5 * 60 * 10000,
             httpOnly: true,
         });
 
@@ -120,3 +121,30 @@ export const getMe = async (req: Request, res: Response) => {
         metadata: dataItem
     }).send(res)
 }
+
+export const sendMail = async (req: CustomRequest, res: Response) => {
+    try {
+        let testAccount = await nodemailer.createTestAccount();
+        const subject = "Welcome to Cuahangsach!";
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: "huynhthanhnhan632004@gmail.com",
+                pass: "txdf iklb zzhm snci",
+            },
+        });
+
+        const info = await transporter.sendMail({
+            from: '"Cuahangsach" <no-reply@cuahangsach.com>',
+            to: "thanhnhan0063426@gmail.com",
+            subject: subject,
+            html: "<h1>Hi</h1>",
+        });
+        res.json({ message: "Mail sent successfully", info });
+    } catch (error) {
+        console.error("Error sending mail:", error);
+        res.status(500).json({ message: "Failed to send email", error });
+    }
+};

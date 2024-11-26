@@ -10,5 +10,6 @@ router.route("/mockup/delete").delete(ProductController.mockupDelete)
 router.route("/create").post(ProductController.createProduct)
 router.route("/find").get(ProductController.findProduct)
 router.route("/find").get(ProductController.findProduct)
-router.route("/upload-image").post(ProductController.uploadProductImage)
+router.route("/upload-local").post(ProductController.uploadProductImageLocal)
+router.route("/upload-cloud").post(ProductController.uploadProductImageCloud)
 export default router

@@ -19,6 +19,7 @@ router.post("/register", authController.register);
 router.use(auth);
 router.post("/logout", authController.logout);
 router.get("/get-me", authController.getMe);
+router.get("/send-mail", authController.sendMail);
 
 
 

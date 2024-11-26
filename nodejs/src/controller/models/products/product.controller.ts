@@ -8,6 +8,8 @@ import { StatusCodes } from "http-status-codes";
 import { CustomRequest } from "../../../interface/common/request.interface";
 import path from "path";
 import fileUpload from "express-fileupload";
+import fs from "fs";
+import { v2 as cloudinary } from "cloudinary"
 const productRepository = mongoose.model<IProduct>("products", productSchema);
 
 export const mockupData = async (req: Request, res: Response) => {
@@ -62,6 +64,14 @@ export const createProduct = async (req: CustomRequest<{}, {}, IProduct, {}>, re
     const imagePath = path.resolve(__dirname, "../../../public/uploads", productImage.name);
     await productImage.mv(imagePath)
     const image = `./uploads/${productImage.name}`
+
+    const maxSize = 1024 * 1024;
+    if (productImage.size > maxSize) {
+        new CREATE({
+            message: "Hình nặng quá",
+        }).send(res)
+            ;
+    }
     const items = await productRepository.create({ image, ...data });
     new CREATE({
         message: "Create Product Success",
@@ -70,7 +80,7 @@ export const createProduct = async (req: CustomRequest<{}, {}, IProduct, {}>, re
 }
 
 
-export const uploadProductImage = async (req: CustomRequest, res: Response) => {
+export const uploadProductImageLocal = async (req: CustomRequest, res: Response) => {
     const productImage: any = req.files.image;
     // console.log(path.resolve(__dirname, "../../../public/uploads"));
 
@@ -79,4 +89,36 @@ export const uploadProductImage = async (req: CustomRequest, res: Response) => {
         metadata: ({ image: { src: `./uploads/${productImage.name}` } })
     }).send(res)
 }
+
+
+
+export const uploadProductImageCloud = async (req: CustomRequest, res: Response) => {
+    try {
+        const productImage: any = req.files.image;
+        if (!productImage) {
+            res.status(400).send({ message: "No image uploaded" });
+        }
+
+        console.log('Image file:', productImage);
+
+        // Upload ảnh lên Cloudinary
+        const result = await cloudinary.uploader.upload(
+            productImage.tempFilePath,
+            {
+                unique_filename: true,
+                folder: "file-upload",
+            }
+        );
+
+        console.log('Upload result:', result);
+        new CREATE({
+            message: "Upload Image Success",
+            metadata: { image: { url: result.secure_url } }
+        }).send(res);
+
+    } catch (error) {
+        console.error('Error during image upload:', error);
+        res.status(500).send({ message: 'Error uploading image', error: error.message });
+    }
+};
 

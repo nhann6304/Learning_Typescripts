@@ -21,6 +21,8 @@ import fs from "fs"
 import path from "path";
 import swaggerJsdoc from "swagger-jsdoc";
 import fileUpload from "express-fileupload";
+import { v2 as cloudinary } from 'cloudinary'
+
 
 
 // {
@@ -96,7 +98,8 @@ const server = express();
     // const openapiSpecification = swaggerJsdoc(option)
     // server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(openapiSpecification))
 
-
+    // upload file
+    server.use(fileUpload({ useTempFiles: true }));
     //morgan
     server.use(morgan("tiny"));
     // Check truyền body
@@ -105,8 +108,15 @@ const server = express();
     server.use(express.json());
     // Cookie 
     server.use(cookieParser())
-    // upload file
-    server.use(fileUpload());
+
+    // cloudinary
+
+
+    cloudinary.config({
+        cloud_name: process.env.CLOUSE_NAME,
+        api_key: process.env.CLOUSE_API_KEY,
+        api_secret: process.env.CLOUSE_API_SECRET
+    })
     //  Các Router
     server.use("/api/v1/auth", rtAuth);
     server.use("/api/v1/task", rtTasks);
