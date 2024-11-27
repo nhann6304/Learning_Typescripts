@@ -6,7 +6,7 @@ export const SignJWT = <T extends object>(payload: T): string => {
 };
 
 
-export const decodeJWT = <T extends JwtPayload>(token: string): T => {
+export const decodeJwt = <T extends JwtPayload>(token: string): T => {
     try {
         const result = verify(token, process.env.JWT_SECRET);
         return result as T
