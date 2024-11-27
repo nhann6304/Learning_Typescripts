@@ -18,3 +18,15 @@ npm install @types/jsonwebtoken --save-dev
 
 npm install mongoose --save
 npm install @types/mongoose --save-dev
+
+npm i validator
+npm i @types/validator
+
+npm i jsonwebtoken
+npm i @types/jsonwebtoken
+
+npm i bcrypt
+npm i @types/bcrypt
+
+npm i cookie-parser
+npm i @types/cookie-parser

@@ -1,5 +1,4 @@
 import { JwtPayload, sign, verify } from "jsonwebtoken";
-import { OK } from "../core/success.response";
 
 export const SignJWT = <T extends object>(payload: T): string => {
     const token = sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_TIME })
@@ -7,14 +6,13 @@ export const SignJWT = <T extends object>(payload: T): string => {
 };
 
 
-export const decodeJwt = <T extends JwtPayload>(token: string): T => {
+export const decodeJWT = <T extends JwtPayload>(token: string): T => {
     try {
         const result = verify(token, process.env.JWT_SECRET);
         return result as T
     } catch (error) {
         return error
     }
-
 }
 
 
