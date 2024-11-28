@@ -74,7 +74,7 @@ export const login = async (req: CustomRequest<{}, {}, IUser, {}>, res: Response
         });
 
         res.cookie("token", token, {
-            maxAge: 5 * 60 * 10000,
+            maxAge: 5 * 60 * 1000,
             httpOnly: true,
         });
 
