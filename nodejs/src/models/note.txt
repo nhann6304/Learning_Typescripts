@@ -1,0 +1,2 @@
+models dành cho mongoose db 
+entity dành cho mysql

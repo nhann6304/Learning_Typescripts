@@ -1,0 +1,32 @@
+npm install bcryptjs --save
+npm install @types/bcryptjs --save-dev
+
+npm install cors --save
+npm install @types/cors --save-dev
+
+npm install express --save
+npm install @types/express --save-dev
+
+npm install express-async-errors --save
+
+npm install express-rate-limit --save 
+
+npm install joi --save
+
+npm install jsonwebtoken --save
+npm install @types/jsonwebtoken --save-dev
+
+npm install mongoose --save
+npm install @types/mongoose --save-dev
+
+npm i validator
+npm i @types/validator
+
+npm i jsonwebtoken
+npm i @types/jsonwebtoken
+
+npm i bcrypt
+npm i @types/bcrypt
+
+npm i cookie-parser
+npm i @types/cookie-parser
